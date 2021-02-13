@@ -1,0 +1,238 @@
+\documentclass[
+			12pt, %tamanho da fonte
+			openright, % capítulos começam em página ímpar
+			sumario=tradicional, %deixa o sumário "bonitinho"
+			a4paper, %tamanho do papel
+			twoside, %opção pra impressão frente e verso, caso queira só frente, use \oneside
+			english, %idioma adicional
+			brazil %idioma principal vem por último
+			] 
+			{abntex2} %classe abntex2 deixa nas normas e puxa uma série de funções úteis em ptbr
+
+%PACOTES
+
+% compilação de fontes
+
+\usepackage{mathtools}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsmath}	
+\usepackage[utf8]{inputenc}
+%\usepackage[portuguese]{babel} desnecessário no abntex
+\usepackage[T1]{fontenc}
+
+%layouts
+\usepackage{indentfirst} %cria parágrafo pra primeira linha do texto
+\usepackage{multicol} %permite trabalhar em mais de uma coluna
+\setlength{\columnsep}{1cm} %define separação entre as colunas
+
+%outros pacotes úteis e específicos
+\usepackage{caption} %outras opções de legenda
+\usepackage{tikz} %pacote pra desenho
+\usepackage[americanvoltages]{circuitikz} %desenhar circuitos
+\usepackage{microtype} 				% para melhorias de justificação
+\usepackage{icomma} %separador de decimal
+\usepackage{units} %escreve unidades em romano dentro do modo matemático
+\usepackage{notoccite} %impede que uma referência da lista de figuras seja contada como referência do trabalho, mudando a ordem com que elas são apresentadas
+\usepackage{siunitx} %algum pacote pra unidades do SI acho que nem uso?
+\usepackage{graphicx} %para inserir imagens
+\usepackage{float} %permite escolher o local da imagem
+\usepackage{lmodern} %latin modern
+\usepackage{lipsum} % gerador de blablabla pra preencher texto
+\usepackage[num]{abntex2cite} %pacote para citação do abntex em formato de número
+\usepackage{subcaption} %permite criar sublegendas em figuras (a),(b),(c), etc.
+\usepackage{tablefootnote} %permite criar uma nota de rodapé em tabela
+\usepackage{titlesec} %customização de seções e capítulos
+\usepackage{hyperref} %permite criar hyperlinks de autorreferências dentro do texto
+\hypersetup{
+	colorlinks=true, %links coloridos
+	linkcolor=blue, %cor dos links
+	citecolor=red % cor das citações
+}
+\usepackage{charter} %pacote para a fonte do texto
+
+%%%%%%%%%%%%%%%%%%% MACROS %%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\titulo{xx}
+\autor{xx}
+\data{xx}
+\instituicao{xx}
+\local{xx}
+\tipotrabalho{xx}
+\orientador{xx}
+\preambulo{xx}
+
+\counterwithin{figure}{chapter} %contar figuras por capítulo
+\counterwithin{table}{chapter} %conta as tabelas por capítulo
+
+\let\oldhat\hat 
+\renewcommand{\vec}[1]{\mathbf{#1}} %fazendo vetores e vetores unitários com negrito e não com seta
+\renewcommand{\hat}[1]{\oldhat{\mathbf{#1}}}
+
+\renewcommand\thesubfigure{(\alph{subfigure})} 
+\captionsetup[sub]{
+	labelformat=simple
+} %arruma a legenda da subfigura arrumar
+
+\begin{document}
+	\pretextual %elementos pré-textuais
+
+		\begin{capa} % capa do trabalho
+			\begin{center}	
+				Ministério da Educação
+				
+				Secretaria de Educação Profissional e Tecnológica
+				
+				\imprimirinstituicao
+				
+				\textit{Campus} \imprimirlocal
+				
+				\vspace{1cm}
+				
+				\textbf{\imprimirautor}
+				
+				\vspace*{\fill}
+				
+				\textbf{\imprimirtitulo}
+				
+				\vfill
+				\textbf{\imprimirlocal}
+				
+				\textbf{\imprimirdata}
+				
+				\thispagestyle{empty}
+			\end{center}	
+		\end{capa}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newpage
+
+	\renewcommand{\folhaderostocontent}{ %folha de rosto redefinida
+		\begin{center}
+	
+			Ministério da Educação
+			
+			Secretaria de Educação Profissional e Tecnológica
+			
+			\imprimirinstituicao
+			
+			\textit{Campus} \imprimirlocal
+			
+			\vspace{1cm}
+			
+			\textbf{\imprimirautor}
+			
+			\vspace*{\fill}	
+			
+			\textbf{\imprimirtitulo}
+			
+			\vspace*{\fill}
+			
+			\small
+			
+			\hspace{\fill}
+			\begin{minipage}{.4 \linewidth}
+				\imprimirpreambulo
+				
+				\vspace{.5cm}
+				
+				Professor orientador: \imprimirorientador
+			\end{minipage}
+		
+			\vfill
+			\normalsize
+			\textbf{xx}
+			
+			\textbf{xx}
+	
+		\end{center}
+	}
+	
+	\imprimirfolhaderosto %imprime a folha de rosto que foi definida
+	
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	
+	 % criando a folha de aprovacao
+		\begin{center}
+			\textbf{\imprimirautor}
+			\vfill
+			\textbf{\imprimirtitulo}
+			\vfill
+			\hspace{\fill}
+			\begin{minipage}{.4 \linewidth}
+				x
+			\end{minipage}
+			\vfill
+			Rio do Sul, 26 de fevereiro de 2021
+			\assinatura{Orientador \imprimirorientador \\ Instituto Federal Catarinense}
+			\vfill
+			\textbf{BANCA EXAMINADORA}
+			\vfill
+			\assinatura{x}
+			\vfill
+			\assinatura{x}
+		\end{center}
+	
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%	
+	\newpage	
+	\begin{epigrafe}
+		\vspace*{\fill}
+		\begin{flushright}
+			\small
+			\textquotedblleft x.\textquotedblright \  
+			
+			(\textit{x})
+		\end{flushright}
+	\end{epigrafe}
+	\cleardoublepage %não deixa página em branco após
+	
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%	
+	\renewcommand{\resumoname}{{\fontfamily{bch}\selectfont Resumo}} %deixa o título do resumo na mesma fontfamily do resto do trabalho
+	\begin{resumo}
+		\lipsum[1-2]
+		\vspace{\onelineskip}
+		\noindent
+		\textbf{Palavras-chave}: x, y, z
+	\end{resumo}
+
+	\begin{resumo}[{\fontfamily{bch}\selectfont Abstract}] %deixa o título na mesma fontfamily do resto do trabalho
+		\selectlanguage{english} %puxa a lingua inglesa pro trabalho
+			\lipsum[1-2]
+			\vspace{\onelineskip}
+			\noindent
+			\textbf{Keywords}: x, y, z
+	\end{resumo}
+
+	\selectlanguage{brazil} %volta ao português
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+	\renewcommand\listfigurename{{\fontfamily{bch}\selectfont Lista de Figuras}} %renomeia e deixa o título da lista de figuras na mesma fontfamily do trabalho
+	\pdfbookmark[0]{\listfigurename}{lof}
+	\listoffigures*
+	\cleardoublepage
+	
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%	
+	
+	\renewcommand\contentsname{{\fontfamily{bch}\selectfont Sumário}} %arruma o título do sumário e deixa na mesma fonte do resto do trabalho
+	\tableofcontents
+	
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	
+	\textual %aqui começa o texto
+	
+	\renewcommand{\ABNTEXchapterfont}{\fontfamily{bch}\selectfont} %deixa a fonte dos capítulos na mesma fonte do trabalho
+	\renewcommand{\ABNTEXchapterfontsize}{\HUGE}  %modifica o tamanho e o tipo da fonte para os capítulos
+
+
+	\chapter*[Introdução]{Introdução}
+
+	\lipsum[1-2]
+	
+	\chapter{Título 1}
+
+	\lipsum[3-4]
+
+	\end{document}
